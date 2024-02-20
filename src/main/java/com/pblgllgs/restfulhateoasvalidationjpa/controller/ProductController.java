@@ -34,7 +34,7 @@ public class ProductController {
 
     @PostMapping
     public ResponseEntity<ProductModel> createProduct(@Valid @RequestBody ProductRecordDto productRecordDto) {
-        ProductModel model = ProductMapper.productMapper.toEntity(productRecordDto);
+        ProductModel model = ProductMapper.dtoToEntity(productRecordDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(productRepository.save(model));
     }
 
@@ -69,7 +69,7 @@ public class ProductController {
         if (productDb.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(NOT_FOUND);
         }
-        ProductModel product = ProductMapper.productMapper.toEntity(productRecordDto);
+        ProductModel product = ProductMapper.dtoToEntity(productRecordDto);
         return ResponseEntity.status(HttpStatus.OK).body(product);
     }
 

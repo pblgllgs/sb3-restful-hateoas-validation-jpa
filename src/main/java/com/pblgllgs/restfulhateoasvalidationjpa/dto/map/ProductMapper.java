@@ -1,18 +1,20 @@
 package com.pblgllgs.restfulhateoasvalidationjpa.dto.map;
+/*
+ *
+ * @author pblgl
+ * Created on 20-02-2024
+ *
+ */
 
 import com.pblgllgs.restfulhateoasvalidationjpa.dto.ProductRecordDto;
 import com.pblgllgs.restfulhateoasvalidationjpa.model.ProductModel;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.factory.Mappers;
+import org.springframework.beans.BeanUtils;
 
-@Mapper
-public interface ProductMapper {
+public class ProductMapper {
 
-    ProductMapper productMapper = Mappers.getMapper(ProductMapper.class);
-    @Mapping(target = "name", source = "name")
-    ProductModel toEntity(ProductRecordDto productRecordDto);
-
-    @Mapping(target = "name", source = "name")
-    ProductRecordDto toDTO(ProductModel productModel);
+    public static ProductModel dtoToEntity(ProductRecordDto productRecordDto){
+        ProductModel productModel = new ProductModel();
+        BeanUtils.copyProperties(productRecordDto,productModel);
+        return productModel;
+    }
 }
